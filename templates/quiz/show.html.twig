@@ -1,0 +1,120 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Quizz!{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        :checked+label #border {
+            transform: scale(1.04);
+            box-shadow: 0 0 5px #333;
+            z-index: -1;
+            border-color: #f9fafb;
+            border-color: rgba(249, 250, 251, var(1));
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="py-6 flex flex-col justify-center sm:py-12">
+        <div class="flex space-x-4 px-4 justify-around">
+            <!-- CARD -->
+            <div class="bg-gradient-to-t from-black via-red-900 to-red-700  h-72 w-28 md:w-96 md:rounded-3xl rounded-full shadow-md relative flex flex-col items-center justify-between md:items-start py-5 md:p-5 transition-all duration-150">
+                <!-- TEXTS -->
+                <div class=" transform -rotate-90 md:rotate-0 align-middle text-2xl font-semibold text-gray-200 text-center m-auto md:m-0 md:mt-8 w-full">
+                    {{ categorie.name }}
+                </div>
+                <div>
+                    <h3 class="text-lg text-gray-300 font-light text-center hidden md:block">
+                        {{ question.question }}
+                    </h3>
+
+                    {% if reponse %}
+                        <h2 class="text-gray-50 tracking-wider text-lg text-center">
+                            La bonne réponse est : {{ reponse }}
+                        </h2>
+
+                        {% if result %}
+                            <h3 class="text-gray-50 tracking-wider text-lg text-center -pb-3">
+                                ah ouais t'es chaud
+                            </h3>
+                        {% else %}
+                            <h3 class="text-gray-50 tracking-wider text-lg text-center -pb-3">
+                                t'es mauvais !!
+                                {% if categorie.name == 'Harry Potter'%}
+                                    retourne a poudlard
+                                {% endif %}
+                                {% if categorie.name == 'Sigles Français'%}
+                                    moi c'est mj (machael jackson)
+                                {% endif %}
+                                {% if categorie.name == 'Les spécialités culinaires'%}
+                                    LLOOLL c'etait pas toi le cordon bleu ?
+                                {% endif %}
+                                {% if categorie.name == 'Définitions de mots'%}
+                                    moi aussi je suis nul sur cette categorie
+                                {% endif %}
+                                {% if categorie.name == 'Séries TV : les simpson - partie 1'%}
+                                    TOH (j'espere ta la ref)
+                                {% endif %}
+                                {% if categorie.name == 'Séries TV : les simpson - partie 2'%}
+                                    TOH x2 (si ta pas la ref regarde le prime)
+                                {% endif %}
+                                {% if categorie.name == 'Séries TV : Stargate SG1'%}
+                                    j'y connais un beignet perso ...
+                                {% endif %}
+                                {% if categorie.name == 'Séries TV : NCIS'%}
+                                    je suis plus serie romantique <3
+                                {% endif %}{% if categorie.name == 'Jeux de société'%}
+                                    je suis plus jeu video ...
+                                {% endif %}
+                                {% if categorie.name == 'Programmation'%}
+                                    toute façon la programmation c'est pour les looser
+                                {% endif %}
+                                {% if categorie.name == 'Sigles informatiques'%}
+                                    tu dois être meilleur en politique
+                                {% endif %}
+                            </h3>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                <!-- BUTTONS -->
+                {% if not reponse %}
+                    <form action="" method="POST" >
+                        <div class="flex w-full justify-around">
+                            {% set value = 1 %}
+                            {% for reponse in reponses %}
+                                <input type="radio" value="{{ reponse.id }}" id="{{ value }}" name="reponse" class="hidden">
+                                <label for="{{ value }}" class="flex flex-col justify-center items-center">
+                                    <div id="border" class="rounded-md w-full h-full shadow-sm bg-red-400 bg-opacity-40 backdrop-blur-lg">
+                                        <p class=" text-gray-200 mt-5 ml-4">
+                                            {{ reponse.reponse }}
+                                        </p>
+                                    </div>
+                                </label>
+{#                                <button class=" rounded-md w-24 h-16 shadow-sm bg-red-400 bg-opacity-40 backdrop-blur-lg text-gray-200">#}
+{#                                    {{ reponse.reponse }}#}
+{#                                </button>#}
+
+                                {% set value = value + 1 %}
+                            {% endfor %}
+                        </div>
+                    <div class="flex justify-center mt-8">
+                        <button type="submit" class="border-2 border-gray-800 rounded-lg px-3 py-2 text-gray-400 cursor-pointer hover:bg-gray-800 hover:text-gray-200">
+                            VALIDER
+                        </button>
+                    </div>
+                        {% else %}
+                            <div class="flex justify-center mt-8">
+                                <a href="{{ path('quizz.show', { 'id': categorie.id, 'number': nextQuestion }) }}" class="border-2 border-gray-800 rounded-lg px-3 py-2 text-gray-400 cursor-pointer hover:bg-gray-800 hover:text-gray-200">
+                                    suivant
+                                </a>
+                            </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+{% endblock %}

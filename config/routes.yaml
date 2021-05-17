@@ -1,0 +1,32 @@
+index:
+  path: /
+  controller: App\Controller\HomeController::index
+
+login:
+  path: /login
+  controller: App\Controller\UserController::login
+
+register:
+  path: /register
+  controller: App\Controller\RegistrationController::register
+
+quizz:
+  path: /quizz
+  controller: App\Controller\QuizzController::index
+
+quizz.show:
+    path: /quizz/{id}/{number}
+    controller: App\Controller\QuizzController::show
+
+quizz.end:
+    path: /quizz/{id}
+    controller: App\Controller\QuizzController::quizzEnd
+
+quizz.history:
+    path: /user/{id}/history
+    controller: App\Controller\QuizzController::userhistory
+
+logout:
+    path: /logout
+    controller: App\Controller\UserController::logout
+

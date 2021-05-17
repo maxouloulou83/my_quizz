@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+
+    {{ form_start(registrationForm) }}
+
+    <div class="font-sans">
+         <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
+            <div class="relative sm:max-w-sm w-full">
+                <div class="card bg-gray-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
+                <div class="card bg-red-700 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
+                        <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
+                                <div class="mt-7">
+                                    <label for="email" class="block text-sm font-medium text-black"></label>
+                                    {{ form_row(registrationForm.email, {'attr': {'class':"mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"}}) }}
+                                </div>
+
+                                <div class="mt-7">
+                                    <label for="password" class="block text-sm font-medium text-black"></label>
+                                    {{ form_row(registrationForm.plainPassword, {'attr': {'class':"mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"}}) }}
+                                    {{ form_row(registrationForm.agreeTerms) }}
+                                </div>
+                                <div class="mt-7">
+                                    <button type="submit" class="bg-red-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                                        Register
+                                    </button>
+                                    {{ form_end(registrationForm) }}
+                                </div>
+                </div>
+            </div>
+         </div>
+    </div>
+
+{% endblock %}
